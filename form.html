@@ -14,12 +14,22 @@
         .Valid {
             color: green;
         }
+        html{
+            font-size:16px;
+        }
+        @media(max-width:600px){
+            html{
+                font-size:40%;
+            }
+        }
     </style>
 
 </head>
 
 <body>
-    <div style="border:1rem solid grey;height:45rem;width:40rem;margin-left:30%;margin-top: 10%">
+    <div>
+    <div style="margin:0 auto;width:40rem">
+    <div style="border:1rem solid grey;height:45rem;width:40rem;margin-top: 10%">
         <div style="border-radius:3rem" class="container">
             <h1 style="margin-left:1rem">Choose New Password</h1>
             <h3 style="margin-left:1rem">All most done. Enter your new password and you're all set</h3>
@@ -51,13 +61,14 @@
 
             </div>
             <div style="margin-left:6rem">
-                <Button style="border-radius:1rem;background-color:#4338ca;height:3rem;width:20rem;color:white;font-size:1.5rem;padding:1rem">Reset
+                <Button style="border-radius:1rem;background-color:#4338ca;height:3rem;width:20rem;color:white;font-size:1.5rem">Reset
                     Password</Button>
 
             </div>
         </form>
     </div>
-
+    </div>
+    </div>
     <script>
         var inputValue = document.querySelector(".input");
         console.log(inputValue)
@@ -97,7 +108,7 @@
                 capitalLetter.classList.remove("Valid");
                 capitalLetter.classList.add("inValid");
             }
-            var specialCharacter = /[!@#$%]/g;
+            var specialCharacter = /[!@#$%^&*()_+-={}|;':",./<>?]/g;
             if (inputValue.value.match(specialCharacter)) {
                 specialc.classList.remove("inValid");
                 specialc.classList.add("Valid");
