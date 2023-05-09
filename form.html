@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+    <style>
+        .inValid {
+            color: red;
+        }
+
+        .Valid {
+            color: green;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div style="border:1rem solid grey;height:45rem;width:40rem;margin-left:30%;margin-top: 10%">
+        <div style="border-radius:3rem" class="container">
+            <h1 style="margin-left:1rem">Choose New Password</h1>
+            <h3 style="margin-left:1rem">All most done. Enter your new password and you're all set</h3>
+        </div>
+        <form onsubmit="return validating()">
+            <div style="margin-left:1rem">
+                <label style="font-weight:1000;">Create a Password</label><br><br>
+                <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="input"
+                    style="border:.2rem solid lightgrey;width:30rem;box-shadow:inset 1rem;height:1.5rem;border-radius: .5rem;"
+                    type="password" required>
+            </div>
+            <div style="margin-left:1rem;margin-top:1.5rem">
+                <label style="font-weight:1000;">Confirm new pasword</label><br><br>
+                <input onchange="matching()" class="cpassword"
+                    style="border:.2rem solid lightgrey;width:30rem;box-shadow:inset 1rem;height:1.5rem;border-radius: .5rem;"
+                    type="text" required>
+            </div>
+            <div style="margin-bottom:3rem;margin-left:20%">
+                <p id="cpassword" style="font-size:2rem;color:red"></p>
+            </div>
+            <div style="display:grid;margin-left:1rem">
+
+                <p id="lcharacter" class="inValid"  style="font-size:1.5rem">one lowercase character</p>
+                <p id="scharacter" class="inValid"  style="font-size:1.5rem;">one special character</p>
+                <p id="ucharacter" class="inValid"  style="font-size:1.5rem;">one uppercase character</p>
+                <p id="mcharacter" class="inValid"  style="font-size:1.5rem;grid-column:2;grid-row:3">8
+                    character minimum</p>
+                <p id="onenumber" class="inValid" class="sValid" style="font-size:1.5rem;">one number</p>
+
+            </div>
+            <div style="margin-left:6rem">
+                <Button style="border-radius:1rem;background-color:#4338ca;height:3rem;width:20rem;color:white;font-size:1.5rem;padding:1rem">Reset
+                    Password</Button>
+
+            </div>
+        </form>
+    </div>
+
+    <script>
+        var inputValue = document.querySelector(".input");
+        console.log(inputValue)
+        var confirmPassword = document.querySelector(".cpassword")
+        var capitalLetter = document.getElementById("ucharacter");
+        console.log(capitalLetter)
+        var smallLetter = document.getElementById("lcharacter");
+        var atleast = document.getElementById("mcharacter");
+        var digit = document.getElementById("onenumber");
+        var specialc = document.getElementById("scharacter");
+        var passwordMatching = document.querySelector("#cpassword")
+        function matching(){
+            if(confirmPassword.value===inputValue.value){
+                alert("Password matched");
+            }else{
+                alert("Password is not matching");
+                return false;
+            }
+        }
+    
+        inputValue.onkeyup = function () {
+            var lowerCaseLetters = /[a-z]/g;
+            if (inputValue.value.match(lowerCaseLetters)) {
+                smallLetter.classList.remove("inValid");
+                smallLetter.classList.add("Valid");
+            } else {
+                smallLetter.classList.remove("Valid");
+                smallLetter.classList.add("inValid");
+            }
+
+            
+            var upperCaseLetters = /[A-Z]/g;
+            if (inputValue.value.match(upperCaseLetters)) {
+                capitalLetter.classList.remove("inValid");
+                capitalLetter.classList.add("Valid");
+            } else {
+                capitalLetter.classList.remove("Valid");
+                capitalLetter.classList.add("inValid");
+            }
+            var specialCharacter = /[!@#$%]/g;
+            if (inputValue.value.match(specialCharacter)) {
+                specialc.classList.remove("inValid");
+                specialc.classList.add("Valid");
+            } else {
+                specialc.classList.remove("Valid");
+                specialc.classList.add("inValid");
+            }
+
+            
+            var numbers = /[0-9]/g;
+            if (inputValue.value.match(numbers)) {
+                digit.classList.remove("inValid");
+                digit.classList.add("Valid");
+            } else {
+                digit.classList.remove("Valid");
+                digit.classList.add("inValid");
+            }
+
+        
+            if (inputValue.value.length >= 8) {
+                atleast.classList.remove("inValid");
+                atleast.classList.add("Valid");
+            } else {
+                atleast.classList.remove("Valid");
+                atleast.classList.add("inValid");
+            }
+        }
+    </script>
+</body>
+
+</html>
